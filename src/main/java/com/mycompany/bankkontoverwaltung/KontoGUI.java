@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 public class KontoGUI extends JFrame {
 
     JTextArea infortainment = new JTextArea();
-    private final JList usrList = new JList();
+    private final JList testen = new JList();
     private final double money = 50;
     private final JLabel lbMoney = new JLabel();
     private final Transaction vw2 = new Transaction();
@@ -83,7 +83,7 @@ public class KontoGUI extends JFrame {
             t10.start();
         } else {
             vw.onAdd(JOptionPane.showInputDialog("Bitte einen Namen eingeben!!!"));
-            usrList.updateUI();
+            testen.updateUI();
         }
 
     }
@@ -102,15 +102,15 @@ public class KontoGUI extends JFrame {
         labelUsr.setLayout(new BorderLayout());
         labelUsr.setText("User");
         JScrollPane scroll = new JScrollPane(labelUsr);
-        usrList.setModel(vw);
+        testen.setModel(vw);
         labelUsr.add(new JLabel("User"), BorderLayout.NORTH);
-        labelUsr.add(usrList, BorderLayout.CENTER);
+        labelUsr.add(testen, BorderLayout.CENTER);
         JPopupMenu pop = new JPopupMenu();
         JMenuItem item = new JMenuItem("add user");
         pop.add(item);
         JMenuItem item2 = new JMenuItem("perform account test");
         pop.add(item2);
-        usrList.addMouseListener(new MouseAdapter() {
+        testen.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 pop.setLocation(getPosition());
@@ -150,7 +150,7 @@ public class KontoGUI extends JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Keine Eingabe");
         }
-        usrList.updateUI();
+        testen.updateUI();
     }
 
     public Point getPosition() {

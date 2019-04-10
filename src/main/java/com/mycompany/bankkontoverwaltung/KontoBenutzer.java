@@ -70,7 +70,7 @@ public class KontoBenutzer extends Thread {
 
     }
 
-    private String getUser() {
+    public String getUser() {
         int i = verWaltung.getSize();
         user = new Random().nextInt(i - 0) + 0;
         String usr = (String) verWaltung.getElementAt(user);
