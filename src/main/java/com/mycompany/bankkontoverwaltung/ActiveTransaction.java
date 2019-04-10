@@ -28,7 +28,7 @@ public class ActiveTransaction {
     synchronized void entfernen(double money, String user) {
         this.money = this.money - money;
         lbMoney.setText("Money: " + this.money);
-        vw2.add(new TransactionDatabase(user, " hat ", money, "abgehoben"));
+        vw2.add(new TransactionDatabase(user, " hat ", money, " abgehoben"));
     }
 
     synchronized void waitingFor() throws InterruptedException {

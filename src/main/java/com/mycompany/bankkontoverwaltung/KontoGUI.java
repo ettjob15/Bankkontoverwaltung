@@ -1,9 +1,5 @@
 package com.mycompany.bankkontoverwaltung;
 
-import com.mycompany.bankkontoverwaltung.ActiveTransaction;
-import com.mycompany.bankkontoverwaltung.Konto;
-import com.mycompany.bankkontoverwaltung.KontoBenutzer;
-import com.mycompany.bankkontoverwaltung.Transaction;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -29,7 +25,18 @@ public class KontoGUI extends JFrame {
     private final ActiveTransaction moneyClass = new ActiveTransaction(lbMoney, money, vw2);
     private final Konto vw = new Konto();
     private JLabel labelUsr;
-   
+    private KontoBenutzer t1;
+    private KontoBenutzer t2;
+    private KontoBenutzer t3;
+    private KontoBenutzer t4;
+    private KontoBenutzer t5;
+    private KontoBenutzer t6;
+    private KontoBenutzer t7;
+    private KontoBenutzer t8;
+    private KontoBenutzer t9;
+    private KontoBenutzer t10;
+    private ThreadStateRunner runner;
+
     public static void main(String[] args) {
         KontoGUI bv = new KontoGUI();
         bv.setVisible(true);
@@ -49,17 +56,17 @@ public class KontoGUI extends JFrame {
 
     public void testen() {
         if (vw.getSize() != 0) {
-           
-            KontoBenutzer t1 = new KontoBenutzer(moneyClass, vw,this,0,vw2);
-            KontoBenutzer t2 = new KontoBenutzer(moneyClass, vw,this,1,vw2);
-            KontoBenutzer t3 = new KontoBenutzer(moneyClass, vw,this,2,vw2);
-            KontoBenutzer t4 = new KontoBenutzer(moneyClass, vw,this,3,vw2);
-            KontoBenutzer t5 = new KontoBenutzer(moneyClass, vw,this,4,vw2);
-            KontoBenutzer t6 = new KontoBenutzer(moneyClass, vw,this,5,vw2);
-            KontoBenutzer t7 = new KontoBenutzer(moneyClass, vw,this,6,vw2);
-            KontoBenutzer t8 = new KontoBenutzer(moneyClass, vw,this,7,vw2);
-            KontoBenutzer t9 = new KontoBenutzer(moneyClass, vw,this,8,vw2);
-            KontoBenutzer t10 = new KontoBenutzer(moneyClass, vw,this,9,vw2);
+            t1 = new KontoBenutzer(moneyClass, vw, this, 0, vw2);
+            t2 = new KontoBenutzer(moneyClass, vw, this, 1, vw2);
+            t3 = new KontoBenutzer(moneyClass, vw, this, 2, vw2);
+            t4 = new KontoBenutzer(moneyClass, vw, this, 3, vw2);
+            t5 = new KontoBenutzer(moneyClass, vw, this, 4, vw2);
+            t6 = new KontoBenutzer(moneyClass, vw, this, 5, vw2);
+            t7 = new KontoBenutzer(moneyClass, vw, this, 6, vw2);
+            t8 = new KontoBenutzer(moneyClass, vw, this, 7, vw2);
+            t9 = new KontoBenutzer(moneyClass, vw, this, 8, vw2);
+            t10 = new KontoBenutzer(moneyClass, vw, this, 9, vw2);
+            runner = new ThreadStateRunner(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
             t1.setPriority(10);
             t2.setPriority(10);
             t3.setPriority(10);
@@ -70,7 +77,7 @@ public class KontoGUI extends JFrame {
             t8.setPriority(10);
             t9.setPriority(10);
             t10.setPriority(10);
-            
+            runner.start();
             t1.start();
             t2.start();
             t3.start();
@@ -81,9 +88,9 @@ public class KontoGUI extends JFrame {
             t8.start();
             t9.start();
             t10.start();
+
         } else {
-            vw.onAdd(JOptionPane.showInputDialog("Bitte einen Namen eingeben!!!"));
-            testen.updateUI();
+            namenHinzufuegen();
         }
 
     }
@@ -139,18 +146,26 @@ public class KontoGUI extends JFrame {
         JLabel labelLog = new JLabel();
         labelLog.setLayout(new BorderLayout());
         labelLog.add(new JLabel("Log"), BorderLayout.NORTH);
-        labelLog.add(infortainment, BorderLayout.CENTER);
+        JScrollPane s = new JScrollPane(infortainment);
+        labelLog.add(s, BorderLayout.CENTER);
         return labelLog;
     }
 
     public void namenHinzufuegen() {
         String s = JOptionPane.showInputDialog("Bitte Namen Eingeben!!!");
-        if (!s.isEmpty()) {
-            vw.onAdd(s);
-        } else {
-            JOptionPane.showMessageDialog(null, "Keine Eingabe");
+        try {
+            if (!s.isEmpty()) {
+
+                vw.onAdd(s);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Keine Eingabe");
+            }
+            testen.updateUI();
+        } catch (NullPointerException pointer) {
+
         }
-        testen.updateUI();
+        
     }
 
     public Point getPosition() {
